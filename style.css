@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+input:focus {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  src: url('EB_Garamond/EBGaramond-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'EB Garamond Italic';
+  src: url('EB_Garamond/EBGaramond-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Andalus';
+  src: url('fonts/Andalus.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Simplified Arabic';
+  src: url('fonts/Simplified\ Arabic.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  background-color: rgb(255, 255, 255);
+  font-family: 'EB Garamond', sans-serif;
+  color: #000;
+}
+
+
+
+.toggle-btn span {
+  display: block;
+  background-color: #fff;
+  width: 30px;
+  height: 5px;
+  margin: 3px;
+}
+
+main {
+  padding: 2.5rem;
+}
+
+header {
+  position: -webkit-sticky;
+  position: sticky;
+  width: 100%;
+  max-width: inherit;
+  background-color: #d4af37;
+  color: #fff;
+  padding: 1rem;
+  top: 0;
+}
+
+#search-input::placeholder {
+  /* Safari, Chrome, and Opera */
+  color: #999;
+}
+
+i {
+  padding: 15px;
+}
+
+p {
+  font-size: 1.2em;
+  line-height: 33px;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #b8860b;
+}
+
+h2 {
+  font-size: 2em;
+  color: #8b7500;
+}
+
+h3 {
+  font-size: 1.75em;
+  color: #6e6e6e;
+}
+
+h4 {
+  font-size: 1.25em;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Andalus';
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 1.5em 0;
+}
+
+h4 {
+  font-weight: bold;
+}
+
+.bible {
+  color: #b8860b;
+  font-family: 'Simplified Arabic';
+  font-weight: bolder;
+}
+
+.names {
+  font-family: 'EB Garamond Italic';
+  font-weight: bolder;
+  color: #1e90ff;
+}
+
+/* css for js */
+
+.search-text {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.highlight {
+  background-color: rgba(243, 255, 92, 0.8);
+  color: #000;
+}
+
+.hidden-button {
+  display: none;
+}
+
+.rtl-input {
+  direction: rtl;
+  text-align: right;
+}
