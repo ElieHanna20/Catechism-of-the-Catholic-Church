@@ -84,7 +84,8 @@ i {
   padding: 15px;
 }
 
-p {
+p,
+li {
   font-size: 1.2em;
   line-height: 33px;
 }
@@ -119,7 +120,8 @@ h1,
 h2,
 h3,
 h4,
-p {
+p,
+li {
   margin: 1.5em 0;
 }
 
