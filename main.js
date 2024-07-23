@@ -101,9 +101,18 @@ input.addEventListener("keyup", () =>
 });
 
 //toggle nav
+
+
 toggleButton.addEventListener('click', () =>
 {
   sidebar.classList.toggle('hidden');
   console.log('toggle on');
 
 });
+
+// toggleButton.addEventListener('touchend', () =>
+// {
+//   sidebar.classList.toggle('hidden');
+//   console.log('toggle on');
+
+// });
