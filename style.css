@@ -16,29 +16,30 @@ input:focus {
 }
 
 @font-face {
-  font-family: 'EB Garamond';
-  src: url('EB_Garamond/EBGaramond-VariableFont_wght.ttf') format('truetype');
+  font-family: "EB Garamond";
+  src: url("EB_Garamond/EBGaramond-VariableFont_wght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'EB Garamond Italic';
-  src: url('EB_Garamond/EBGaramond-Italic-VariableFont_wght.ttf') format('truetype');
+  font-family: "EB Garamond Italic";
+  src: url("EB_Garamond/EBGaramond-Italic-VariableFont_wght.ttf")
+    format("truetype");
   font-weight: 700;
   font-style: italic;
 }
 
 @font-face {
-  font-family: 'Andalus';
-  src: url('fonts/Andalus.ttf') format('truetype');
+  font-family: "Andalus";
+  src: url("fonts/Andalus.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Simplified Arabic';
-  src: url('fonts/Simplified\ Arabic.ttf') format('truetype');
+  font-family: "Simplified Arabic";
+  src: url("fonts/Simplified\ Arabic.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
 }
@@ -46,11 +47,9 @@ input:focus {
 body {
   margin: 0;
   background-color: rgb(255, 255, 255);
-  font-family: 'EB Garamond', sans-serif;
+  font-family: "EB Garamond", sans-serif;
   color: #000;
 }
-
-
 
 .toggle-btn span {
   display: block;
@@ -113,7 +112,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: 'Andalus';
+  font-family: "Andalus";
 }
 
 h1,
@@ -131,12 +130,12 @@ h4 {
 
 .bible {
   color: #b8860b;
-  font-family: 'Simplified Arabic';
+  font-family: "Simplified Arabic";
   font-weight: bolder;
 }
 
 .names {
-  font-family: 'EB Garamond Italic';
+  font-family: "EB Garamond Italic";
   font-weight: bolder;
   color: #1e90ff;
 }
