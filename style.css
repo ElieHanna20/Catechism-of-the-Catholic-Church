@@ -121,6 +121,7 @@ h3,
 h4,
 p,
 li {
+  list-style: none;
   margin: 1.5em 0;
 }
 
