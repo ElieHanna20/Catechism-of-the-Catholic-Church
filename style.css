@@ -24,8 +24,7 @@ input:focus {
 
 @font-face {
   font-family: "EB Garamond Italic";
-  src: url("EB_Garamond/EBGaramond-Italic-VariableFont_wght.ttf")
-    format("truetype");
+  src: url("EB_Garamond/EBGaramond-Italic-VariableFont_wght.ttf") format("truetype");
   font-weight: 700;
   font-style: italic;
 }
@@ -84,8 +83,14 @@ i {
 }
 
 p,
+ul,
 li {
   font-size: 1.2em;
+  line-height: 33px;
+}
+
+li {
+  font-size: 1em;
   line-height: 33px;
 }
 
@@ -120,6 +125,7 @@ h2,
 h3,
 h4,
 p,
+ul,
 li {
   list-style: none;
   margin: 1.5em 0;
