@@ -1,8 +1,8 @@
 import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from 'vite'
 import tailwindcss from 'tailwindcss'
+import { resolve } from 'path'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [VitePWA({
     registerType: 'autoUpdate',
@@ -35,4 +35,17 @@ export default defineConfig({
   }),
     tailwindcss,
   ],
+
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),  // Main page
+        page1: resolve(__dirname, 'pages/الجزء-الاول.html'),  // Example additional page
+        page2: resolve(__dirname, 'pages/الجزء-الثاني.html'),  // Example additional page
+        page3: resolve(__dirname, 'pages/الجزء-ثالث.html'),  // Example additional page
+        page4: resolve(__dirname, 'pages/الجزء-الرابع.html'),  // Example additional page
+        page5: resolve(__dirname, 'pages/شرح-البنية.html'),  // Example additional page
+      },
+    },
+  },
 })
