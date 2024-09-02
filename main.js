@@ -67,7 +67,15 @@ function applyHighlights(filter)
   });
 
   InputCount.innerText = spanElements.length > 0 ? `1 / ${spanElements.length}` : "0 / 0";
+
+  // Scroll to the first result if there are any
+  if (spanElements.length > 0)
+  {
+    currentIndex = 0; // Set index to the first element
+    updateDisplay();
+  }
 }
+
 
 // Event listener for search input
 try
@@ -141,16 +149,23 @@ try
   console.error("An error occurred with the up button:", error);
 }
 
-// Update display based on current index
+// Function to handle scrolling and updating display
 function updateDisplay()
 {
   if (spanElements.length > 0)
   {
-    spanElements[currentIndex].scrollIntoView(false);
+    console.log(`Current Index: ${currentIndex}`);
+
+    // Scroll to the current element
+    spanElements[currentIndex].scrollIntoView({
+      behavior: "smooth", // Smooth scrolling for better UX
+      block: "center" // Aligns the element in the center of the viewport
+    });
+
+    // Update the input count display
     InputCount.innerText = `${currentIndex + 1} / ${spanElements.length}`;
   }
 }
-
 // Toggle sidebar
 toggleButton.addEventListener("click", () =>
 {
