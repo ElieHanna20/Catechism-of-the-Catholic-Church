@@ -1,5 +1,6 @@
 const input = document.getElementById("search-input");
 const downButton = document.querySelector("#down");
+const upButton = document.querySelector("#up");
 const InputCount = document.querySelector("#input-count");
 const toggleButton = document.querySelector(".toggle-btn");
 const sidebar = document.querySelector("#sidebar");
@@ -7,121 +8,150 @@ const sidebar = document.querySelector("#sidebar");
 let currentIndex = 0;
 let spanElements = [];
 let timeout;
+let originalHtml = new Map();
 
-
-// try catch block so the app donesn't crashe on the main page 
-try
+// Utility function to preserve HTML while adding highlights
+function highlightText(element, searchTerm)
 {
-  // Add the event listener for the down button once
-  downButton.addEventListener("click", () =>
-  {
-    if (spanElements.length > 0)
-    {
-      // Scroll to the current element
-      spanElements[currentIndex].scrollIntoView(false);
-
-      // Log the element to the console
-      InputCount.innerText = `${currentIndex + 1} / ${spanElements.length}`;
-
-      // Increment the index
-      currentIndex++;
-
-      // If the index is out of bounds, reset it to 0
-      if (currentIndex >= spanElements.length)
-      {
-        currentIndex = 0;
-      }
-    }
-  });
-} catch (error)
-{
-
+  const regex = new RegExp(`(${searchTerm})`, "gi");
+  const content = element.innerHTML;
+  element.innerHTML = content.replace(regex, '<span class="highlight">$1</span>');
 }
 
-// try catch block so the app donesn't crashe on the main page 
+// Recursive function to process nodes
+function processNode(node, filter)
+{
+  if (node.nodeType === Node.TEXT_NODE)
+  {
+    const text = node.nodeValue;
+    const regex = new RegExp(filter, "gi");
+    const newText = text.replace(regex, '<span class="highlight">$&</span>');
+    if (newText !== text)
+    {
+      const span = document.createElement('span');
+      span.innerHTML = newText;
+      node.parentNode.replaceChild(span, node);
+    }
+  } else if (node.nodeType === Node.ELEMENT_NODE)
+  {
+    if (node.childNodes.length > 0)
+    {
+      node.childNodes.forEach(child => processNode(child, filter));
+    }
+  }
+}
+
+// Function to apply highlights to elements
+function applyHighlights(filter)
+{
+  spanElements = [];
+  document.querySelectorAll(".search-text *").forEach((element) =>
+  {
+    let originalContent = originalHtml.get(element);
+
+    if (!originalContent)
+    {
+      originalHtml.set(element, element.innerHTML);
+      originalContent = element.innerHTML;
+    }
+
+    if (element.textContent.toUpperCase().includes(filter))
+    {
+      element.innerHTML = originalContent; // Restore original content first
+      processNode(element, filter); // Apply highlight
+      spanElements.push(...element.querySelectorAll(".highlight")); // Collect highlighted spans
+    } else
+    {
+      element.innerHTML = originalContent; // Restore original content if no match
+    }
+  });
+
+  InputCount.innerText = spanElements.length > 0 ? `1 / ${spanElements.length}` : "0 / 0";
+}
+
+// Event listener for search input
 try
 {
   input.addEventListener("keyup", () =>
   {
-    // Clear the previous timeout
     clearTimeout(timeout);
-
-    // Set a new timeout
     timeout = setTimeout(() =>
     {
-      // Get input value in upper case letters
       const filter = input.value.trim().toUpperCase();
 
-      // Get all of the paragraphs that should be searched through
-      const paragraphs = document.querySelectorAll(
-        ".search-text p, .search-text h1, .search-text h2, .search-text h3, .search-text h4"
-      );
-
-      // Clear previous highlights and reset index
-      currentIndex = 0;
-      spanElements = [];
-
-      // Check if the input is empty
       if (filter === "")
       {
-        // Hide the button
-        downButton.classList.add("hidden-button");
-        InputCount.innerText = ""; // Reset the count display
+        // Clear highlights and restore original HTML
+        downButton.classList.add("hidden");
+        upButton.classList.add("hidden");
+        InputCount.innerText = "";
 
-        // Loop through all paragraphs
-        paragraphs.forEach((p) =>
+        document.querySelectorAll(".search-text *").forEach((element) =>
         {
-          // Set the paragraphs to their default text content
-          p.innerHTML = p.textContent;
+          element.innerHTML = originalHtml.get(element) || element.innerHTML;
         });
 
-        // Exit the function
+        spanElements = [];
+        currentIndex = 0;
         return;
       }
 
-      paragraphs.forEach((p) =>
-      {
-        // Get the text content of each paragraph
-        let txtValue = p.textContent;
+      applyHighlights(filter);
 
-        // Check if the text matches the input value
-        if (txtValue.toUpperCase().indexOf(filter) > -1)
-        {
-          txtValue = txtValue.replace(
-            new RegExp(filter, "gi"),
-            '<span class="highlight">$&</span>'
-          );
-
-          // Set the paragraph inner html to the new text
-          p.innerHTML = txtValue;
-          // Show the button after search
-          downButton.classList.remove("hidden-button");
-        } else
-        {
-          p.innerHTML = txtValue;
-        }
-      });
-
-      // Update the spanElements array with the new highlights
-      spanElements = [...document.querySelectorAll(".highlight")];
-
-      // Update the input count display
-      InputCount.innerText = `1 / ${spanElements.length}`;
-
-      // Reset current index
-      currentIndex = 0;
+      downButton.classList.remove("hidden");
+      upButton.classList.remove("hidden");
     }, 500); // 500ms delay
   });
-
-
 } catch (error)
 {
-
+  console.error("An error occurred with the search input:", error);
 }
 
+// Event listener for down button
+try
+{
+  downButton.addEventListener("click", (event) =>
+  {
+    event.stopPropagation();
+    if (spanElements.length > 0)
+    {
+      currentIndex = (currentIndex + 1) % spanElements.length;
+      updateDisplay();
+    }
+  });
+} catch (error)
+{
+  console.error("An error occurred with the down button:", error);
+}
 
-//toggle nav
+// Event listener for up button
+try
+{
+  upButton.addEventListener("click", (event) =>
+  {
+    event.stopPropagation();
+    if (spanElements.length > 0)
+    {
+      currentIndex = (currentIndex - 1 + spanElements.length) % spanElements.length;
+      updateDisplay();
+    }
+  });
+} catch (error)
+{
+  console.error("An error occurred with the up button:", error);
+}
 
+// Update display based on current index
+function updateDisplay()
+{
+  if (spanElements.length > 0)
+  {
+    spanElements[currentIndex].scrollIntoView(false);
+    InputCount.innerText = `${currentIndex + 1} / ${spanElements.length}`;
+  }
+}
+
+// Toggle sidebar
 toggleButton.addEventListener("click", () =>
 {
   sidebar.classList.toggle("hidden");
