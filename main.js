@@ -123,7 +123,7 @@ try
     event.stopPropagation();
     if (spanElements.length > 0)
     {
-      currentIndex = (currentIndex + 1) % spanElements.length;
+      currentIndex++;
       updateDisplay();
     }
   });
@@ -140,7 +140,7 @@ try
     event.stopPropagation();
     if (spanElements.length > 0)
     {
-      currentIndex = (currentIndex - 1 + spanElements.length) % spanElements.length;
+      currentIndex--;
       updateDisplay();
     }
   });
@@ -154,6 +154,15 @@ function updateDisplay()
 {
   if (spanElements.length > 0)
   {
+    // Ensure the currentIndex wraps around correctly
+    if (currentIndex >= spanElements.length)
+    {
+      currentIndex = 0; // Wrap around to the first element
+    } else if (currentIndex < 0)
+    {
+      currentIndex = spanElements.length - 1; // Wrap around to the last element
+    }
+
     console.log(`Current Index: ${currentIndex}`);
 
     // Scroll to the current element
