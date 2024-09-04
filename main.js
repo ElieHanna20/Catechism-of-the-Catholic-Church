@@ -45,7 +45,7 @@ function processNode(node, filter)
 function applyHighlights(filter)
 {
   spanElements = [];
-  document.querySelectorAll(".search-text *").forEach((element) =>
+  document.querySelectorAll(".search-text").forEach((element) =>
   {
     let originalContent = originalHtml.get(element);
 
@@ -94,9 +94,14 @@ try
         upButton.classList.add("hidden");
         InputCount.innerText = "";
 
-        document.querySelectorAll(".search-text *").forEach((element) =>
+        document.querySelectorAll(".highlight").forEach((element) =>
         {
-          element.innerHTML = originalHtml.get(element) || element.innerHTML;
+          // Remove the highlight class and restore original content
+          const originalContent = originalHtml.get(element.closest(".search-text"));
+          if (originalContent)
+          {
+            element.closest(".search-text").innerHTML = originalContent;
+          }
         });
 
         spanElements = [];
@@ -114,6 +119,7 @@ try
 {
   console.error("An error occurred with the search input:", error);
 }
+
 
 // Event listener for down button
 try
