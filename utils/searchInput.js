@@ -1,4 +1,4 @@
-const searchInput = (timeout, input, downButton, upButton, InputCount, spanElements, currentIndex, originalHtml, processNode, applyHighlights, updateDisplay) => 
+const searchInput = (timeout, input, downButton, upButton, InputCount, spanElements, currentIndex, originalHtml, span, processNode, applyHighlights, updateDisplay) => 
 {
     clearTimeout(timeout);
     timeout = setTimeout(() =>
@@ -27,7 +27,7 @@ const searchInput = (timeout, input, downButton, upButton, InputCount, spanEleme
             return;
         }
 
-        applyHighlights(spanElements, filter, originalHtml, InputCount, currentIndex, processNode, updateDisplay);
+        applyHighlights(spanElements, filter, originalHtml, InputCount, currentIndex, span, processNode, updateDisplay);
 
         downButton.classList.remove("hidden");
         upButton.classList.remove("hidden");

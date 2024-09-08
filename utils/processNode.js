@@ -1,5 +1,5 @@
 // Recursive function to process nodes
-const processNode = (node, filter) =>
+const processNode = (node, filter, span) =>
 {
     if (node.nodeType === Node.TEXT_NODE)
     {
@@ -8,17 +8,16 @@ const processNode = (node, filter) =>
         const newText = text.replace(regex, '<span class="highlight">$&</span>');
         if (newText !== text)
         {
-            const span = document.createElement('span');
             span.innerHTML = newText;
-            node.parentNode.replaceChild(span, node);
+            node.parentNode.replaceChild(span.cloneNode(true), node);
         }
     } else if (node.nodeType === Node.ELEMENT_NODE)
     {
         if (node.childNodes.length > 0)
         {
-            node.childNodes.forEach(child => processNode(child, filter));
+            node.childNodes.forEach(child => processNode(child, filter, span));
         }
     }
 }
 
-export default processNode;
+export default processNode

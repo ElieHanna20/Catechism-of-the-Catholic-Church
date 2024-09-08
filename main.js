@@ -9,6 +9,7 @@ const upButton = document.querySelector("#up");
 const InputCount = document.querySelector("#input-count");
 const toggleButton = document.querySelector(".toggle-btn");
 const sidebar = document.querySelector("#sidebar");
+const span = document.createElement('span');
 
 let currentIndex = { current: 0 };
 let spanElements = [];
@@ -18,15 +19,26 @@ let originalHtml = new Map();
 // Event listener for search input
 try
 {
-  input.addEventListener("keyup", (event) =>
+  input.addEventListener('keyup', (event) =>
   {
-    // Ensure input is passed correctly here
-    searchInput(timeout, input, downButton, upButton, InputCount, spanElements, currentIndex, originalHtml, processNode, applyHighlights, updateDisplay);
+    searchInput(timeout, input, downButton, upButton, InputCount, spanElements, currentIndex, originalHtml, span, processNode, applyHighlights, updateDisplay);
   });
 } catch (error)
 {
-  console.error("An error occurred with the search input:", error);
+  console.error("An error occurred with the keyup event listener:", error);
 }
+
+try
+{
+  input.addEventListener('paste', (event) =>
+  {
+    searchInput(timeout, input, downButton, upButton, InputCount, spanElements, currentIndex, originalHtml, span, processNode, applyHighlights, updateDisplay);
+  });
+} catch (error)
+{
+  console.error("An error occurred with the paste event listener:", error);
+}
+
 
 
 // Event listener for down button

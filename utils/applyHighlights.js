@@ -1,5 +1,5 @@
 // Function to apply highlights to elements
-const applyHighlights = (spanElements, filter, originalHtml, InputCount, currentIndex, processNode, updateDisplay) =>
+const applyHighlights = (spanElements, filter, originalHtml, InputCount, currentIndex, span, processNode, updateDisplay) =>
 {
     spanElements.length = [];
     document.querySelectorAll(".search-text").forEach((element) =>
@@ -15,7 +15,7 @@ const applyHighlights = (spanElements, filter, originalHtml, InputCount, current
         if (element.textContent.toUpperCase().includes(filter))
         {
             element.innerHTML = originalContent; // Restore original content first
-            processNode(element, filter); // Apply highlight
+            processNode(element, filter, span); // Apply highlight
             spanElements.push(...element.querySelectorAll(".highlight")); // Collect highlighted spans
         } else
         {
