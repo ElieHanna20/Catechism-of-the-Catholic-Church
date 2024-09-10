@@ -22,6 +22,8 @@ const searchInput = (timeout, input, downButton, upButton, InputCount, spanEleme
                 }
             });
 
+            // originalHtml.clear();
+            // console.log(originalHtml);
             spanElements.length = 0; // Clear the spanElements array
             currentIndex.current = 0; // Reset the index
             return;
@@ -31,7 +33,7 @@ const searchInput = (timeout, input, downButton, upButton, InputCount, spanEleme
 
         downButton.classList.remove("hidden");
         upButton.classList.remove("hidden");
-    }, 500); // 500ms delay
+    }, 0); // 500ms delay
 }
 
 export default searchInput;

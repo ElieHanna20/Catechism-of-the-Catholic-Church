@@ -20,4 +20,4 @@ const processNode = (node, filter, span) =>
     }
 }
 
-export default processNode
+export default processNode;
