@@ -1,86 +1,30 @@
+import highlightMatches from "./utils/highlightMatches";
+import removeHighlights from "./utils/removeHighlights";
+import updateDisplay from "./utils/updateDisplay";
+
 const sidebar = document.querySelector("#sidebar");
 const toggleButton = document.querySelector(".toggle-btn");
 const searchInput = document.getElementById("search-input");
-const mainElement = document.querySelector("main"); // Get the main tag
-let mainHtml = mainElement.innerHTML; // Get the innerHTML as a string
+const mainElement = document.querySelector("main");
 const InputCount = document.querySelector("#input-count");
+const downButton = document.querySelector("#down");
+const upButton = document.querySelector("#up");
 
+let mainHtml = mainElement.innerHTML; // Get the innerHTML as a string
 let timeout = 0;
-let currentIndex = 0;
+const state = {
+  currentIndex: 0
+};
 let spanElements = [];
-
-const updateDisplay = () =>
-{
-  console.log('updateDisplay');
-  if (spanElements.length > 0)
-  {
-    // Ensure the currentIndex wraps around correctly
-    if (currentIndex >= spanElements.length)
-    {
-      currentIndex = 0; // Wrap around to the first element
-    } else if (currentIndex < 0)
-    {
-      currentIndex = spanElements.length - 1; // Wrap around to the last element
-    }
-    console.log(`Current Index: ${currentIndex}`);
-    // Scroll to the current element
-    spanElements[0].scrollIntoView({
-      behavior: "smooth", // Smooth scrolling for better UX
-      block: "center" // Aligns the element in the center of the viewport
-    });
-
-    // Update the input count display
-    InputCount.innerText = `${currentIndex + 1} / ${spanElements.length}`;
-  }
-
-}
-
-// Function to highlight matches and store span elements
-const highlightMatches = (searchTerm) =>
-{
-  console.log('addHi');
-  if (document.querySelector('mark')) removeHighlights;
-
-  // Check if the search term is not empty or just whitespace
-  if (searchTerm.trim().length === 0) return;
-
-  // Escape special characters in searchTerm for safe use in split
-  const escapedTerm = searchTerm.replace(/([.*+?^${}()|[\]\\])/g, '\\$1');
-
-  // Highlight matches by splitting and joining with <mark> tags
-  const highlightedHtml = mainHtml.split(escapedTerm).join(`<mark>${escapedTerm}</mark>`);
-  mainElement.innerHTML = highlightedHtml;
-  const mark = document.querySelectorAll('mark');
-  spanElements = Array.from(mark);
-
-  currentIndex = spanElements.length;
-
-  updateDisplay();
-};
-
-const removeHighlights = () =>
-{
-  console.log('removeHi');
-  currentIndex = 0;
-  // Remove <mark> and </mark> tags from the HTML
-  mainHtml = mainHtml.split('<mark>').join('').split('</mark>').join('');
-
-  // Set the cleaned HTML back to the main tag
-  mainElement.innerHTML = mainHtml;
-};
-
-// Example Usage:
 
 try
 {
   downButton.addEventListener("click", (event) =>
   {
     event.stopPropagation();
-    if (spanElements.length > 0)
-    {
-      currentIndex++;
-      updateDisplay(spanElements, currentIndex, InputCount);
-    }
+
+    ++state.currentIndex;
+    updateDisplay(state, spanElements, InputCount);
   });
 } catch (error)
 {
@@ -93,11 +37,9 @@ try
   upButton.addEventListener("click", (event) =>
   {
     event.stopPropagation();
-    if (spanElements.length > 0)
-    {
-      currentIndex--;
-      updateDisplay(spanElements, currentIndex, InputCount);
-    }
+
+    --state.currentIndex;
+    updateDisplay(state, spanElements, InputCount);
   });
 } catch (error)
 {
@@ -105,23 +47,30 @@ try
 }
 
 // Listen for search input to highlight terms
-searchInput.addEventListener("input", (event) =>
+try
 {
-  clearTimeout(timeout);
-  timeout = setTimeout(() =>
+  searchInput.addEventListener("input", (event) =>
   {
-    const searchTerm = event.target.value;
-
-    if (searchTerm.trim().length === 0)
+    clearTimeout(timeout);
+    timeout = setTimeout(() =>
     {
+      const searchTerm = event.target.value;
 
-      removeHighlights();
-      return;
-    }
+      if (searchTerm.trim().length === 0)
+      {
+        removeHighlights(mainHtml, state, mainElement, upButton, downButton, InputCount);
+        return;
+      }
 
-    highlightMatches(searchTerm);
-  }, 300);
-});
+      highlightMatches(searchTerm, mainHtml, state, spanElements, mainElement, upButton, downButton, InputCount, removeHighlights, updateDisplay);
+    }, 500);
+  });
+
+} catch (error)
+{
+  console.error("An error occurred with the keyup event listener:", error);
+}
+
 
 // Toggle sidebar
 toggleButton.addEventListener("click", () =>
