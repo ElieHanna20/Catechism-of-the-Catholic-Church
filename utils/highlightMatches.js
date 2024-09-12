@@ -10,7 +10,7 @@ const highlightMatches = (
   removeHighlights,
   updateDisplay
 ) => {
-  console.log("addHi");
+  // console.log("addHi");
   if (document.querySelector("mark"))
     removeHighlights(
       mainHtml,

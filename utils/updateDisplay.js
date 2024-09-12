@@ -1,25 +1,23 @@
 const updateDisplay = (state, spanElements, InputCount) => {
-  console.log("updateDisplay");
-  console.log("Span InputCount:", InputCount);
-  console.log("Span spanElements:", spanElements);
-  console.log("State:", state);
+  // console.log("updateDisplay");
 
-  // Check if spanElements is not empty
-  if (spanElements.length === 0) {
-    console.warn("No span elements found.");
-    return;
-  }
+  // // Check if spanElements is not empty
+  // if (spanElements.length === 0) {
+  //   console.warn("No span elements found.");
+  //   return;
+  // }
 
   // Ensure currentIndex is a valid number
-  if (typeof state.currentIndex !== "number" || isNaN(state.currentIndex)) {
-    console.warn("currentIndex is not a valid number, resetting to 0.");
-    state.currentIndex = 0;
-  }
+  // if (typeof state.currentIndex !== "number" || isNaN(state.currentIndex)) {
+  //   console.warn("currentIndex is not a valid number, resetting to 0.");
+  //   state.currentIndex = 0;
+  // }
 
   // Reset currentIndex to 0 if out of bounds
-  if (state.currentIndex >= spanElements.length || state.currentIndex < 0) {
-    console.warn("currentIndex out of bounds, resetting to 0.");
-    state.currentIndex = 0;
+  if (state.currentIndex >= spanElements.length) {
+    state.currentIndex = 0; // Wrap around to the first element
+  } else if (state.currentIndex < 0) {
+    state.currentIndex = spanElements.length - 1; // Wrap around to the last element
   }
 
   const currentElement = spanElements[state.currentIndex];

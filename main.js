@@ -33,7 +33,7 @@ try {
   upButton.addEventListener("click", (event) => {
     event.stopPropagation();
 
-    --state.currentIndex;
+    state.currentIndex--;
     updateDisplay(state, spanElements, InputCount);
   });
 } catch (error) {
@@ -47,7 +47,8 @@ try {
     timeout = setTimeout(() => {
       const searchTerm = event.target.value;
 
-      if (searchTerm.trim().length === 0) {
+      // if (!document.querySelector("mark")) return;
+      if (searchTerm.trim().length === 0 && document.querySelector("mark")) {
         removeHighlights(
           mainHtml,
           state,

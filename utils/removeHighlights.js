@@ -6,9 +6,7 @@ const removeHighlights = (
   downButton,
   InputCount
 ) => {
-  // console.log('removeHi');
-  if (!document.querySelector("mark")) return;
-  // console.log('removeHi with mark');
+  // console.log("removeHi");
 
   state.currentIndex = 0;
   // Remove <mark> and </mark> tags from the HTML
