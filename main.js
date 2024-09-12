@@ -13,67 +13,71 @@ const upButton = document.querySelector("#up");
 let mainHtml = mainElement.innerHTML; // Get the innerHTML as a string
 let timeout = 0;
 const state = {
-  currentIndex: 0
+  currentIndex: 0,
 };
 let spanElements = [];
 
-try
-{
-  downButton.addEventListener("click", (event) =>
-  {
+try {
+  downButton.addEventListener("click", (event) => {
     event.stopPropagation();
 
     ++state.currentIndex;
     updateDisplay(state, spanElements, InputCount);
   });
-} catch (error)
-{
+} catch (error) {
   console.error("An error occurred with the down button:", error);
 }
 
 // Event listener for up button
-try
-{
-  upButton.addEventListener("click", (event) =>
-  {
+try {
+  upButton.addEventListener("click", (event) => {
     event.stopPropagation();
 
     --state.currentIndex;
     updateDisplay(state, spanElements, InputCount);
   });
-} catch (error)
-{
+} catch (error) {
   console.error("An error occurred with the up button:", error);
 }
 
 // Listen for search input to highlight terms
-try
-{
-  searchInput.addEventListener("input", (event) =>
-  {
+try {
+  searchInput.addEventListener("input", (event) => {
     clearTimeout(timeout);
-    timeout = setTimeout(() =>
-    {
+    timeout = setTimeout(() => {
       const searchTerm = event.target.value;
 
-      if (searchTerm.trim().length === 0)
-      {
-        removeHighlights(mainHtml, state, mainElement, upButton, downButton, InputCount);
+      if (searchTerm.trim().length === 0) {
+        removeHighlights(
+          mainHtml,
+          state,
+          mainElement,
+          upButton,
+          downButton,
+          InputCount
+        );
         return;
       }
 
-      highlightMatches(searchTerm, mainHtml, state, spanElements, mainElement, upButton, downButton, InputCount, removeHighlights, updateDisplay);
+      highlightMatches(
+        searchTerm,
+        mainHtml,
+        state,
+        spanElements,
+        mainElement,
+        upButton,
+        downButton,
+        InputCount,
+        removeHighlights,
+        updateDisplay
+      );
     }, 500);
   });
-
-} catch (error)
-{
+} catch (error) {
   console.error("An error occurred with the keyup event listener:", error);
 }
 
-
 // Toggle sidebar
-toggleButton.addEventListener("click", () =>
-{
+toggleButton.addEventListener("click", () => {
   sidebar.classList.toggle("hidden");
 });
