@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.TheFaithOfTheCatholicChurch" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/status_bar_color</item> <!-- Custom color -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item> <!-- Ensure status bar color is drawn -->
+    </style>
+
+    <style name="Theme.TheFaithOfTheCatholicChurch" parent="Base.Theme.TheFaithOfTheCatholicChurch" />
+</resources>
