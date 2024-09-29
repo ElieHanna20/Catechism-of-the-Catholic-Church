@@ -1,9 +1,8 @@
 const removeHighlights = (
+  buttonContainer,
   mainHtml,
   state,
   mainElement,
-  upButton,
-  downButton,
   InputCount
 ) => {
   // console.log("removeHi");
@@ -14,8 +13,10 @@ const removeHighlights = (
 
   // Set the cleaned HTML back to the main tag
   mainElement.innerHTML = mainHtml;
-  downButton.classList.add("hidden");
-  upButton.classList.add("hidden");
+  // downButton.classList.add("hidden");
+  // upButton.classList.add("hidden");
+  buttonContainer.classList.add("hidden");
+
   InputCount.innerText = "";
 };
 

@@ -1,26 +1,18 @@
 const highlightMatches = (
+  buttonContainer,
   noMatchesMessage,
   searchTerm,
   mainHtml,
   state,
   spanElements,
   mainElement,
-  upButton,
-  downButton,
   InputCount,
   removeHighlights,
   updateDisplay
 ) => {
   // console.log("addHi");
   if (document.querySelector("mark"))
-    removeHighlights(
-      mainHtml,
-      state,
-      mainElement,
-      upButton,
-      downButton,
-      InputCount
-    );
+    removeHighlights(buttonContainer, mainHtml, state, mainElement, InputCount);
 
   const trimmedSearchTerm = searchTerm.trim();
   // Check if the search term is not empty or just whitespace
@@ -45,10 +37,10 @@ const highlightMatches = (
     return;
   }
   state.currentIndex = 0; // Reset index when new search term is highlighted
-  console.log(InputCount);
   updateDisplay(state, spanElements, InputCount);
-  downButton.classList.remove("hidden");
-  upButton.classList.remove("hidden");
+  // downButton.classList.remove("hidden");
+  // upButton.classList.remove("hidden");
+  buttonContainer.classList.remove("hidden");
 };
 
 export default highlightMatches;

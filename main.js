@@ -3,6 +3,7 @@ import removeHighlights from "./utils/removeHighlights";
 import updateDisplay from "./utils/updateDisplay";
 
 const noMatchesMessage = document.querySelector("#noMatchesMessage");
+const buttonContainer = document.querySelector("#button-container");
 const sidebar = document.querySelector("#sidebar");
 const toggleButton = document.querySelector(".toggle-btn");
 const searchInput = document.getElementById("search-input");
@@ -53,25 +54,23 @@ try {
       // if (!document.querySelector("mark")) return;
       if (searchTerm.trim().length === 0 && document.querySelector("mark")) {
         removeHighlights(
+          buttonContainer,
           mainHtml,
           state,
           mainElement,
-          upButton,
-          downButton,
           InputCount
         );
         return;
       }
 
       highlightMatches(
+        buttonContainer,
         noMatchesMessage,
         searchTerm,
         mainHtml,
         state,
         spanElements,
         mainElement,
-        upButton,
-        downButton,
         InputCount,
         removeHighlights,
         updateDisplay
@@ -83,6 +82,10 @@ try {
 }
 
 // Toggle sidebar
-toggleButton.addEventListener("click", () => {
-  sidebar.classList.toggle("hidden");
-});
+try {
+  toggleButton.addEventListener("click", () => {
+    sidebar.classList.toggle("hidden");
+  });
+} catch (error) {
+  console.error("An error occurred with the toggle listner:", error);
+}
