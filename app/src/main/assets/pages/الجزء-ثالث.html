@@ -6,25 +6,27 @@
 
 
     <title>Part 3</title>
-    <link rel="stylesheet" href="../assets/main-CdGYR0kd.css">
-    <script type="module" src="../assets/main-Bpwinbub.js"></script>
+    <link rel="stylesheet" href="../assets/main-BL-NJqqa.css" />
+    <script type="module" src="../assets/main-CVgBWDEe.js"></script>
   </head>
   <body>
-    <header class="p-4 flex items-center justify-center">
+    <header class="p-4 flex items-center justify-center h-[5rem]">
       <button class="toggle-btn flex-1 lg:absolute right-0 ml-4 lg:mr-4">
         <span></span>
         <span></span>
         <span></span>
       </button>
       <div
-        class="flex rounded-full bg-[#ffffffbb] w-full max-w-[300px] px-10 lg:max-w-[600px]">
-        <div id="buttons-container" class="flex">
+        class="flex relative rounded-full bg-[#ffffffbb] w-full max-w-[300px] px-10 lg:max-w-[600px]">
+        <div
+          id="button-container"
+          class="hidden absolute flex justify-center mt-10">
           <button
             id="up"
-            class="hidden self-center flex p-1 cursor-pointer rounded-md">
+            class="self-center flex p-1 cursor-pointer rounded-md">
             <svg
-              width="20px"
-              height="20px"
+              width="1.563rem"
+              height="1.563rem"
               viewBox="0 0 1024 1024"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg">
@@ -35,10 +37,10 @@
           </button>
           <button
             id="down"
-            class="hidden self-center flex p-1 cursor-pointer rounded-md">
+            class="self-center flex p-1 cursor-pointer rounded-md">
             <svg
-              width="20px"
-              height="20px"
+              width="1.563rem"
+              height="1.563rem"
               viewBox="0 0 1024 1024"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg">
@@ -47,14 +49,20 @@
                 fill="#000000" />
             </svg>
           </button>
+
+          <strong id="input-count" class="whitespace-nowrap"></strong>
         </div>
-        <strong id="input-count"></strong>
         <input
           type="text"
           id="search-input"
           autocomplete="off"
           class="w-full bg-transparent pl-2 text-gray-400 focus:outline-none focus:bg-transparent focus:text-gray-400 rtl-input"
           placeholder="بحث عن اسم الفرع..." />
+        <div
+          id="noMatchesMessage"
+          class="hidden whitespace-nowrap text-red-700 mt-2">
+          ما من نتائج
+        </div>
         <div class="relative p-2 rounded-full">
           <svg
             width="30px"

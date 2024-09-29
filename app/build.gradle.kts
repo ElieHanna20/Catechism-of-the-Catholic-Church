@@ -3,14 +3,14 @@ plugins {
 }
 
 android {
-    namespace = "com.example.thefaithofthecatholicchurch"
+    namespace = "com.eliehanna.thefaithofthecatholicchurch"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.thefaithofthecatholicchurch"
+        applicationId = "com.eliehanna.thefaithofthecatholicchurch"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
+        versionCode = 4
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
