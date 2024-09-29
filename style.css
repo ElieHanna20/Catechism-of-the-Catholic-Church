@@ -15,11 +15,10 @@ input:focus {
   box-shadow: none;
 }
 
-
 body {
   margin: 0;
   background-color: rgb(255, 255, 255);
-  font-family: 'Times New Roman', Georgia, 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Georgia, "Times New Roman", Times, serif;
   color: #000;
 }
 
@@ -69,12 +68,12 @@ li {
 
 h1 {
   font-size: 2.5em;
-  color: #b8860b;
+  color: #a68a00;
 }
 
 h2 {
   font-size: 2em;
-  color: #8b7500;
+  color: #a68a00;
 }
 
 h3 {
@@ -109,7 +108,7 @@ h4 {
 }
 
 .bible {
-  color: #b8860b;
+  color: #a68a00;
   font-weight: bold;
 }
 
@@ -142,7 +141,6 @@ nav ul li {
 .hidden {
   display: none !important;
 }
-
 
 .st0-svg2 {
   fill: #ffffff;

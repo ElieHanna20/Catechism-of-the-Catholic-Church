@@ -2,6 +2,7 @@ import highlightMatches from "./utils/highlightMatches";
 import removeHighlights from "./utils/removeHighlights";
 import updateDisplay from "./utils/updateDisplay";
 
+const noMatchesMessage = document.querySelector("#noMatchesMessage");
 const sidebar = document.querySelector("#sidebar");
 const toggleButton = document.querySelector(".toggle-btn");
 const searchInput = document.getElementById("search-input");
@@ -47,6 +48,8 @@ try {
     timeout = setTimeout(() => {
       const searchTerm = event.target.value;
 
+      //if noMatchesMessage was not hidden previosly
+      noMatchesMessage.classList.add("hidden");
       // if (!document.querySelector("mark")) return;
       if (searchTerm.trim().length === 0 && document.querySelector("mark")) {
         removeHighlights(
@@ -61,6 +64,7 @@ try {
       }
 
       highlightMatches(
+        noMatchesMessage,
         searchTerm,
         mainHtml,
         state,

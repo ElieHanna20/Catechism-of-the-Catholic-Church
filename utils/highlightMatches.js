@@ -1,4 +1,5 @@
 const highlightMatches = (
+  noMatchesMessage,
   searchTerm,
   mainHtml,
   state,
@@ -39,7 +40,10 @@ const highlightMatches = (
   const mark = document.querySelectorAll("mark");
   spanElements.length = 0; // Clear existing array
   spanElements.push(...mark); // Update spanElements with new elements
-
+  if (spanElements.length === 0) {
+    noMatchesMessage.classList.remove("hidden");
+    return;
+  }
   state.currentIndex = 0; // Reset index when new search term is highlighted
   console.log(InputCount);
   updateDisplay(state, spanElements, InputCount);

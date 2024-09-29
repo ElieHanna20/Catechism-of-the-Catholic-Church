@@ -8,7 +8,7 @@
     <title>Part 1</title>
   </head>
   <body>
-    <header class="p-4 flex items-center justify-center">
+    <header class="p-4 flex items-center justify-center h-[5rem]">
       <button class="toggle-btn flex-1 lg:absolute right-0 ml-4 lg:mr-4">
         <span></span>
         <span></span>
@@ -53,6 +53,11 @@
           autocomplete="off"
           class="w-full bg-transparent pl-2 text-gray-400 focus:outline-none focus:bg-transparent focus:text-gray-400 rtl-input"
           placeholder="بحث عن اسم الفرع..." />
+        <div
+          id="noMatchesMessage"
+          class="hidden whitespace-nowrap text-red-700 mt-2">
+          ما من نتائج
+        </div>
         <div class="relative p-2 rounded-full">
           <svg
             width="30px"
