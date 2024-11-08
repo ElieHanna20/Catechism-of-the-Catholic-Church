@@ -11,6 +11,7 @@ const mainElement = document.querySelector("main");
 const InputCount = document.querySelector("#input-count");
 const downButton = document.querySelector("#down");
 const upButton = document.querySelector("#up");
+const header = document.querySelector("header");
 
 let mainHtml = mainElement.innerHTML; // Get the innerHTML as a string
 let timeout = 0;
@@ -45,6 +46,7 @@ try {
 // Listen for search input to highlight terms
 try {
   searchInput.addEventListener("input", (event) => {
+    event.stopPropagation();
     clearTimeout(timeout);
     timeout = setTimeout(() => {
       const searchTerm = event.target.value;
@@ -83,7 +85,8 @@ try {
 
 // Toggle sidebar
 try {
-  toggleButton.addEventListener("click", () => {
+  toggleButton.addEventListener("click", (e) => {
+    e.stopPropagation();
     sidebar.classList.toggle("hidden");
   });
 } catch (error) {
